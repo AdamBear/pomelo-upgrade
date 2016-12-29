@@ -1,52 +1,50 @@
+'use strict';
 
 module.exports = function(grunt)
 {
 
 	grunt.loadNpmTasks('grunt-mocha-test');
 	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
+	require('load-grunt-tasks')(grunt);
 
 	const src = ['test/manager/taskManager.js', 'test/filters/*.js',
-  'test/remote/*.js', 'test/service/*.js', 'test/modules/*.js', 'test/util/*.js', 'test/*.js'];
+		'test/remote/*.js', 'test/service/*.js', 'test/modules/*.js', 'test/util/*.js', 'test/*.js'];
 
-  // Project configuration.
+	// Project configuration.
 	grunt.initConfig(
 		{
 			mochaTest :
-			{
-				test : {
-					options : {
-						reporter : 'spec'
-                        //timeout  : 5000,
-						//require  : 'coverage/blanket'
+				{
+					test : {
+						options : {
+							reporter : 'spec'
+							//timeout  : 5000,
+							//require  : 'coverage/blanket'
+						},
+						src : src
 					},
-					src : src
+					coverage : {
+						options : {
+							reporter    : 'html-cov',
+							quiet       : true,
+							captureFile : 'coverage.html'
+						},
+						src : src
+					}
 				},
-				coverage : {
-					options : {
-						reporter    : 'html-cov',
-						quiet       : true,
-						captureFile : 'coverage.html'
-					},
-					src : src
-				}
-			},
 			clean :
-			{
-				'coverage.html' : {
-					src : ['coverage.html']
-				}
-			},
-			jshint :
-			{
-				options : {
-					'esversion' : 6,
-					'force':true
+				{
+					'coverage.html' : {
+						src : ['coverage.html']
+					}
 				},
-				all : ['lib/*']
-			}
+			eslint :
+				{
+					target: ['lib/*']
+				}
+
 		});
 
-  // Default task.
-	grunt.registerTask('default', ['clean', 'jshint', 'mochaTest']);
+	// Default task.
+	grunt.registerTask('default', ['eslint', 'clean', 'mochaTest']);
 };

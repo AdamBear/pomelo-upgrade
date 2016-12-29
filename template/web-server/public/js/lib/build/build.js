@@ -6,7 +6,6 @@
 
 var has = Object.prototype.hasOwnProperty;
 
-/* Refer to https://github.com/componentjs/require/blob/master/lib/require.js */
 /**
  * Require the given path.
  *
@@ -467,14 +466,7 @@ require.register("NetEase-pomelo-protocol/lib/protocol.js", function(exports, re
       }
       array.push(charCode);
     }
-    var res = '';
-    var chunk = 8 * 1024;
-    var i;
-    for (i = 0; i < array.length / chunk; i++) {
-        res += String.fromCharCode.apply(null, array.slice(i * chunk, (i + 1) * chunk));
-    }
-    res += String.fromCharCode.apply(null, array.slice(i * chunk));
-    return res;
+    return String.fromCharCode.apply(null, array);
   };
 
   /**

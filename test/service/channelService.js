@@ -1,6 +1,7 @@
 var should = require('should');
-var pomelo = require('../../');
+//var pomelo = require('../../');
 var ChannelService = require('../../lib/common/service/channelService');
+var app = require('../mock-base/app/mockApplication.js');
 
 var channelName = 'test_channel';
 var mockBase = process.cwd() + '/test';
@@ -95,7 +96,7 @@ describe('channel manager test', function() {
         cb();
       };
 
-      var app = pomelo.createApp({base: mockBase});
+      //var app = pomelo.createApp({base: mockBase});
       app.rpcInvoke = mockRpcInvoke;
       var channelService = new ChannelService(app);
 
@@ -105,9 +106,13 @@ describe('channel manager test', function() {
       });
     });
 
+var channelName = 'test_channel';
+var mockBase = process.cwd() + '/test';
+var mockApp = {serverId: 'test-server-1'};
+
     it('should return an err if uids is empty', function(done) {
       var mockMsg = {key: 'some remote message'};
-      var app = pomelo.createApp({base: mockBase});
+      //var app = pomelo.createApp({base: mockBase});
       var channelService = new ChannelService(app);
 
       channelService.pushMessageByUids(mockMsg, null, function(err) {
@@ -138,7 +143,7 @@ describe('channel manager test', function() {
         cb(new Error('[TestMockError] mock rpc error'));
       };
 
-      var app = pomelo.createApp({base: mockBase});
+      //var app = pomelo.createApp({base: mockBase});
       app.rpcInvoke = mockRpcInvoke;
       var channelService = new ChannelService(app);
 
@@ -173,7 +178,7 @@ describe('channel manager test', function() {
         }
       };
 
-      var app = pomelo.createApp({base: mockBase});
+      //var app = pomelo.createApp({base: mockBase});
       app.rpcInvoke = mockRpcInvoke;
       var channelService = new ChannelService(app);
 
@@ -182,8 +187,8 @@ describe('channel manager test', function() {
         should.not.exist(err);
         should.exist(fails);
         fails.length.should.equal(2);
-        fails.should.include(uid1);
-        fails.should.include(uid3);
+        fails.should.containEql(uid1);
+        fails.should.containEql(uid3);
         done();
       });
     });
@@ -223,9 +228,9 @@ describe('channel manager test', function() {
         cb();
       };
 
-      var app = pomelo.createApp({base: mockBase});
+      //var app = pomelo.createApp({base: mockBase});
       app.rpcInvoke = mockRpcInvoke;
-      app.addServers(mockServers);
+      app.replaceServers(mockServers);
       var channelService = new ChannelService(app);
 
       channelService.broadcast(mockSType, mockRoute, mockMsg,
@@ -233,7 +238,7 @@ describe('channel manager test', function() {
         invokeCount.should.equal(2);
         sids.length.should.equal(connectorIds.length);
         for(var i=0, l=connectorIds.length; i<l; i++) {
-          sids.should.include(connectorIds[i]);
+          sids.should.containEql(connectorIds[i]);
         }
         done();
       });

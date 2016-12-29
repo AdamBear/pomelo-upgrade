@@ -1,7 +1,5 @@
 module.exports = {
     "env": {
-        "browser": true,
-        "commonjs": true,
         "es6": true,
         "node": true
     },
@@ -54,8 +52,6 @@ module.exports = {
         "no-throw-literal": "error",
         "no-unmodified-loop-condition":"error",
         "no-useless-call": "error",
-        "no-process-env": "warn",
-        "no-process-exit":"warn",
         "array-bracket-spacing": ["error", "never"],
         "block-spacing": ["error", "never"],
         "brace-style": ["error", "allman", { "allowSingleLine": true }],
@@ -103,7 +99,7 @@ module.exports = {
             "for": { "after": true },
             "while": { "after": true }
         } }],
-        "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+        "func-style": ["warn", "declaration", { "allowArrowFunctions": true }],
         "block-scoped-var":"error",
         "no-else-return": "error",
         "no-nested-ternary": "error",
@@ -128,14 +124,15 @@ module.exports = {
             }
         ],
         "no-console":"off",
+        "no-undef":'warn',
         "require-jsdoc": [
             "error", {
-                "require": {
-                    "FunctionDeclaration": true,
-                    "MethodDefinition": false,
-                    "ClassDeclaration": false
-                }
-            }],
+            "require": {
+                "FunctionDeclaration": true,
+                "MethodDefinition": false,
+                "ClassDeclaration": false
+            }
+        }],
         "linebreak-style": [
             "error",
             "unix"
@@ -167,7 +164,7 @@ module.exports = {
         "no-useless-constructor": "error",
         "no-var": "error",
         "prefer-const": "error",
-        "prefer-rest-params": "error",
+        "prefer-rest-params": "warn",
         "prefer-spread": "error",
         "prefer-template": "error",
         "template-curly-spacing": "error",
