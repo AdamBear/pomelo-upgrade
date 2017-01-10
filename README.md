@@ -1,3 +1,15 @@
+pomelo 2.x 系列
+
+# 更新内容
+
+- es6 语法实现
+- 依赖库升级到高版本
+    - socket.io 1.7.x
+    - node-uuid 更新使用 uuid
+- 支持 es7 语法
+
+
+
 ## Pomelo -- a fast, scalable game server framework for node.js
 
 Pomelo is a fast, scalable game server framework for [node.js](http://nodejs.org).
